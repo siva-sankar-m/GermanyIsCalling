@@ -10,17 +10,20 @@ import org.testng.annotations.Test;
 
 public class GermanyIsCalling 
 {
-	WebDriver driver;
+	WebDriver driver;// Webdriver Interface Reference to Access Browser App and methods.
 
-	@BeforeClass
-	void Preconditions() {
-		driver=new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-		driver.get("https://app.germanyiscalling.com/common/login/");
+	@BeforeClass     //Before Annotations Execute the Test Methods
+	void Preconditions() 
+	{
+		driver=new ChromeDriver();//Creation Of Chrome Driver Instance
+		driver.manage().window().maximize();//Maximize the Browser Window
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));//Synchronize the Scripts By Implicit Wait
+		driver.get("https://app.germanyiscalling.com/common/login/");//Trigger The Url
 	}
-	//Successful Login Testcase
-	@Test(priority = 1)
+	
+	//Verify User Should Be Able To Successful Login With Valid Credetails
+	
+	@Test(priority = 1)//priority annotation executes the test method according user input priority
 	void Valid_Username_and_Password() throws InterruptedException {
 		driver.findElement(By.id("username")).sendKeys("siva29042003@gmail.com");
 		driver.findElement(By.id("password")).sendKeys("Myjob@2024");
@@ -39,13 +42,13 @@ public class GermanyIsCalling
 		Thread.sleep(3000);
 	}
 
-	//UnSuccessful Login Testcase
+	//Verify Error Message Should Be Display For Invalid Credentials
 	@Test(priority = 3)
 	void Invalid_Username() throws InterruptedException {
 		driver.findElement(By.id("username")).sendKeys("siva");
 		driver.findElement(By.id("password")).sendKeys("Myjob@2024");
 		driver.findElement(By.tagName("button")).click();
-		Thread.sleep(1000);
+		Thread.sleep(1000);//Thread.sleep methods stops exectution for 1 seconds for synchronize purpose
 
 		driver.findElement(By.id("username")).sendKeys("12335464568");
 		driver.findElement(By.id("password")).sendKeys("Myjob@2024");
